@@ -10,16 +10,6 @@ The NullNode object represents the result of render an object that is not
 renderizable, or it can not be rendered.
 """
 
-__author__ = "Alejandro Linarez"
-__copyright__ = "Anton Danilchenko"
-__credits__ = ["Anton Danilchenko", "Alejandro Linarez"]
-
-__license__ = "MIT"
-__version__ = "0.0.1"
-__maintainer__ = "Alejandro Linarez"
-# __email__ = ""
-__status__ = "Development"
-
 class RenderedObject:
     """Represents the result of render a component.
 
@@ -99,7 +89,7 @@ class RenderedObject:
         return xmlstr
 
     def __str__(self):
-        """Converts this object to an string.
+        """Converts this object to a string.
 
         Returns a minimalist representation of this object (not XML valid).
 
@@ -121,6 +111,43 @@ class RenderedObject:
         xmlstr += "</" + self._tagName + ">"
         return xmlstr
 
+    def toTreeString(self, indentchar = "    "):
+        """Converts this object to a string.
+
+        The difference between toXMLString and toTreeString is that
+        toTreeString returns a Tree-based representation, instead of
+        a ready-to-parse XML string.
+        """
+        # The format of the TreeString is:
+        #    tagName(attributes):
+        #        childs....
+        # Starts with the tagName:
+        treestr = self._tagName + " ("
+        # Append all attributes using the key="value" format:
+        for key, value in self._properties.items():
+            treestr += key + "=\"" + str(value) + "\" "
+        # Close the parentesis of the attributes
+        treestr += ")"
+        # If not have childs, return the string
+        if len(self._innerContent) == 0:
+            return treestr
+        # Else, append a colon
+        treestr += ":"
+        # And start to iterate over the childs
+        for child in self._innerContent:
+            # If we append the newline at the start of the loop,
+            # we can avoid trailing newlines
+            treestr += "\n"
+            # Now, stringify the child (like toXMLString):
+            if type(child) == str:
+                treestr += indentchar + "\"" + child + "\""
+            elif type(child) == RenderedObject:
+                treestr += indentchar + child.toTreeString(indentchar * 2)
+            else:
+                treestr += indentchar + str(child)
+        # Done (return)
+        return treestr
+
     def innerContent(self):
         """Returns a list of the child elements of this object"""
         return self._innerContent
@@ -135,7 +162,7 @@ class RenderedObject:
 
 # The NullNode is explained at the start of the file
 NullNode = RenderedObject(
-    tagName = "#Null",
+    tagName = "None",
     properties = {},
     innerContent = []
 )

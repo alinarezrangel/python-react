@@ -2,7 +2,7 @@ import UI
 
 class Button(UI.Element):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__()
 
         self.args = kwargs
 
@@ -26,6 +26,18 @@ class Button(UI.Element):
         )
         return res
 
-btn = Button(label="Hello World")
-print(btn.render().toXMLString())
+b1 = Button(label="Button 1")
+b2 = Button(label="Button 2")
+b3 = Button(label="Button 3")
+b4 = Button(label="Button 4")
+b5 = Button(label="Button 5")
+
+c1 = UI.Block(items=[b1, b2])
+c2 = UI.Block(items=[b3])
+c3 = UI.Block(items=[b4, b5])
+c4 = UI.Block(items=[c1, c3])
+
+root = UI.Block(items=[c2, c4])
+
+print(root.render().toTreeString())
 print(UI.get_all_elements())

@@ -8,16 +8,6 @@ An Element is any UI element, these can have events, layouts, etc.
 
 from .renderedobject import *
 
-__author__ = "Alejandro Linarez"
-__copyright__ = "Anton Danilchenko"
-__credits__ = ["Anton Danilchenko", "Alejandro Linarez"]
-
-__license__ = "MIT"
-__version__ = "0.0.1"
-__maintainer__ = "Alejandro Linarez"
-# __email__ = ""
-__status__ = "Development"
-
 class Element:
     """Represents an Element, the basic UI element.
 
@@ -29,13 +19,52 @@ class Element:
 
     # Only accepts keyword arguments because they are more semantic
     # than normal list arguments
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         """Creates a new Element, by default, null.
 
         The arguments keywords object is implemented in sub-classes,
         in this Element class, can be void.
         """
-        pass
+        self._styles = []
+
+    def addClass(self, class_):
+        """Adds a new class style to this element"""
+        self._styles.append(str(class_))
+
+    def removeClass(self, class_):
+        """Removes a class from the class style of this element
+
+        Returns True if the class was successfull removed.
+        """
+        try:
+            # list.remove raises a ValueError if the removed element
+            # is not in the list
+            self._styles.remove(str(class_))
+        except ValueError as err:
+            return False
+        else:
+            return True
+
+    def haveClass(self, class_):
+        """Returns True if the element have the class \"class_\""""
+        try:
+            # list.index raises a ValueError if the searched element
+            # is not in the list
+            self._styles.index(str(class_))
+        except ValueError as err:
+            return False
+        else:
+            return True
+
+    def classList(self):
+        """Returns the elements's style classes list"""
+        return self._styles
+
+    def setClassList(self, lst):
+        """Sets the element's style classes to lst (a list)"""
+        if type(lst) != list:
+            raise TypeError("The ClassList should be a list")
+        self._styles = lst
 
     def render(self):
         """Renders the current Element.
@@ -51,13 +80,18 @@ def get_all_elements():
 
     With the subclasses set, you tag associate the class name with a tag name.
     """
+    # Set containing all subclasses
     subclasses = set()
     subclasses.add(Element);
+    # Classes for inspect
     work = [Element]
-    while work:
-        parent = work.pop()
+    while work: # While have at least one class to inspect:
+        parent = work.pop() # Select it
+        # Iterate over it's direct subclasses (not subsubclasses):
         for child in parent.__subclasses__():
-            if child not in subclasses:
-                subclasses.add(child)
-                work.append(child)
+            if child not in subclasses: # If the class is not registered:
+                subclasses.add(child) # Register it in the set
+                work.append(child) # And select it for inspect.
+                # If we not mark child for inspect, the subsubclasses
+                # will not be registered
     return subclasses
