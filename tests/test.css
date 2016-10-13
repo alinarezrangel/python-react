@@ -1,0 +1,111 @@
+/*
+Test Suite HTML output CSS file.
+
+The test suite generates a set of HTML files that uses
+this CSS for testing.
+*/
+
+html, body {
+    padding: 0 !important;
+    margin: 0 !important;
+    color: black !important;
+    background-color: white !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 1em !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+* {
+    box-sizing: border-box !important;
+}
+
+.padding-0 {padding: 0px !important;}
+.padding-1 {padding: 1px !important;}
+.padding-2 {padding: 2px !important;}
+.padding-4 {padding: 4px !important;}
+.padding-8 {padding: 8px !important;}
+.padding-16 {padding: 16px !important;}
+.padding-32 {padding: 32px !important;}
+.padding-64 {padding: 64px !important;}
+
+.button {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 8px 4px;
+    margin: 8px;
+    color: black;
+    background-color: white;
+
+    -webkit-transition: background-color 0.3s linear;
+    -moz-transition: background-color 0.3s linear;
+    transition: background-color 0.3s linear;
+
+    cursor: pointer;
+}
+
+a.button {
+    color: blue;
+}
+
+.button:hover {
+    background-color: black;
+    color: white;
+}
+
+.button.padding-0 {padding: 0px !important;}
+.button.padding-1 {padding: 1px 0.5px !important;}
+.button.padding-2 {padding: 2px 1px !important;}
+.button.padding-4 {padding: 4px 2px !important;}
+.button.padding-8 {padding: 8px 4px !important;}
+.button.padding-16 {padding: 16px 8px !important;}
+.button.padding-32 {padding: 32px 16px !important;}
+.button.padding-64 {padding: 64px 32px !important;}
+
+.link, .label {
+    display: inline-block;
+    padding: 4px 2px;
+    margin: 8px 4px;
+
+    font-size: 1.1em;
+
+    cursor: default;
+}
+
+.frame, .textview, .container {
+    display: block;
+    padding: 16px;
+    margin: 2px;
+    border: 1px dotted black;
+}
+
+.textview {
+    cursor: text;
+}
+
+.separator {
+    border: 1px solid black;
+    width: auto;
+    margin: 16px 8px;
+}
+
+.link {
+    color: blue;
+}
+
+.frame {
+    padding: 24px;
+
+    border: 1px solid black;
+}
+
+.frame > div[align="center"]:first-child {
+    margin: 8px;
+    margin-top: 0px;
+    padding: 8px;
+    padding-top: 0px;
+    padding-bottom: 16px;
+    font-size: 1.2em !important;
+
+    border-bottom: 1px solid black;
+}
