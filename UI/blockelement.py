@@ -41,7 +41,7 @@ class Block(Element):
         self._items = kwargs.get("items", [])
         self._align = kwargs.get("align", Block.ALIGN_ROW)
         self._args = kwargs
-        super().setClassList(kwargs.get("style", []))
+        super().set_class_list(kwargs.get("style", []))
 
         # Type check
         if type(self._items) != list:
@@ -77,16 +77,16 @@ class Block(Element):
                 arguments[key] = value
 
         # The rendered items of the box
-        renderedItems = []
+        rendered_items = []
 
         # Render all items and push their in the list
         for child in self._items:
-            renderedItems.append(child.render())
+            rendered_items.append(child.render())
 
         # Render this block and return
         result = RenderedObject(
-            tagName = "box",
+            tag_name = "box",
             properties = arguments,
-            innerContent = renderedItems
+            inner_content = rendered_items
         )
         return result

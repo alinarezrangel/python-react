@@ -27,11 +27,11 @@ class Element:
         """
         self._styles = []
 
-    def addClass(self, class_):
+    def add_class(self, class_):
         """Adds a new class style to this element"""
         self._styles.append(str(class_))
 
-    def removeClass(self, class_):
+    def remove_class(self, class_):
         """Removes a class from the class style of this element
 
         Returns True if the class was successfull removed.
@@ -45,7 +45,7 @@ class Element:
         else:
             return True
 
-    def haveClass(self, class_):
+    def have_class(self, class_):
         """Returns True if the element have the class \"class_\""""
         try:
             # list.index raises a ValueError if the searched element
@@ -56,11 +56,11 @@ class Element:
         else:
             return True
 
-    def classList(self):
+    def class_list(self):
         """Returns the elements's style classes list"""
         return self._styles
 
-    def setClassList(self, lst):
+    def set_class_list(self, lst):
         """Sets the element's style classes to lst (a list)"""
         if type(lst) != list:
             raise TypeError("The ClassList should be a list")
@@ -73,7 +73,7 @@ class Element:
         This method should return a RenderedObject
         """
         # The Component is abstract, so we can't render it
-        return NullNode
+        return NULL_NODE
 
 def get_all_elements():
     """Returns a set containing all subclasses of the Element class.

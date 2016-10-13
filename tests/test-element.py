@@ -15,12 +15,12 @@ class Button(UI.Element):
 
     def render(self):
         res = UI.renderedobject.RenderedObject(
-            tagName = "button",
+            tag_name = "button",
             properties = {
                 "type": "button",
                 "class": "button"
             },
-            innerContent = [
+            inner_content = [
                 self.label
             ]
         )
@@ -39,5 +39,5 @@ c4 = UI.Block(items=[c1, c3])
 
 root = UI.Block(items=[c2, c4])
 
-print(root.render().toTreeString())
+print(root.render().to_tree_string())
 print(UI.get_all_elements())
