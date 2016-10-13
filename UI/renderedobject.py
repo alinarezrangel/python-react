@@ -68,9 +68,9 @@ class RenderedObject:
         RenderedObject.
         """
         xmlstr = "<" + self._tagName + " "
-        for key, value in enumerate(self._properties):
-            xmlstr += key + "=\"" + value + "\" "
-        if len(self._properties) == 0:
+        for key, value in self._properties.items():
+            xmlstr += key + "=\"" + str(value) + "\" "
+        if len(self._innerContent) == 0:
             xmlstr += "/>"
             return xmlstr
         xmlstr += ">"
@@ -92,13 +92,13 @@ class RenderedObject:
         Like toXMLString, but never renders the RenderedObject childrens.
         """
         xmlstr = "<" + self._tagName + " "
-        for key, value in enumerate(self._properties):
-            xmlstr += key + "=\"" + value + "\" "
-        if len(self._properties) == 0:
+        for key, value in self._properties.items():
+            xmlstr += key + "=\"" + str(value) + "\" "
+        if len(self._innerContent) == 0:
             xmlstr += "/>"
             return xmlstr
         xmlstr += ">"
-        if len(self._properties) >= 1:
+        if len(self._innerContent) > 0:
             xmlstr += "<...>"
         xmlstr += "</" + self._tagName + ">"
         return xmlstr
