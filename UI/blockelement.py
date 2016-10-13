@@ -62,7 +62,7 @@ class Block(Element):
         # style argument is the class list
         arguments["style"] = ""
         # The super().classList() is a list, but we need a CSS-like string:
-        for class_ in super().classList():
+        for class_ in super().class_list():
             arguments["style"] += " " + str(class_)
         # align is the align mode (ROW or COLUMN)
         if self._align == Block.ALIGN_COLUMN:
