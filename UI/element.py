@@ -19,13 +19,74 @@ class Element:
 
     # Only accepts keyword arguments because they are more semantic
     # than normal list arguments
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Creates a new Element, by default, null.
 
         The arguments keywords object is implemented in sub-classes,
-        in this Element class, can be void.
+        in this Element class, can be void. The only keyword argument used
+        is style, which contains all element classes.
         """
-        self._styles = []
+
+        self._args = kwargs
+        self._kargs = []
+        self._styles = self.register_argument("style", [])
+
+    def register_argument(self, name, otherwise):
+        """Gets and registers a keyword name.
+
+        After register a keyword name, the protected_keyword_name
+        function will return True for that name.
+
+        Returns the value of name in self.args() or otherwise if is
+        undefined.
+        """
+
+        if name not in self._kargs:
+            self._kargs.append(name)
+
+        return self.args().get(name, otherwise)
+
+    def protected_keyword_name(self, name):
+        """Determines if a keyword name 'name' is used on the constructor.
+
+        Returns True if the keyword 'name' is utilized in the constructor.
+        """
+        return name in self._kargs
+
+    def class_list_as_css_string(self):
+        """Gets the class list as a CSS list.
+
+        Returns a list with all element's class names separated by spaces.
+        """
+
+        # style argument is the class list
+        css = ""
+
+        # The super().classList() is a list, but we need a CSS-like string:
+        for class_ in self.class_list():
+            css += " " + str(class_)
+
+        return css[1:]
+
+    def extend_properties(self, arguments):
+        """Returns a modified version of arguments with all properties.
+
+        Each element have it's own properties to be passed to the RenderedObject
+        constructor. This method receives an arguments dictionary with some
+        properties to be passed and adds it's owns. This method should be
+        overrided for all Element's subclasses.
+
+        Returns the version of arguments with new properties.
+        """
+        arguments["style"] = self.class_list_as_css_string()
+        return arguments
+
+    def args(self):
+        """Gets the constructor keyword arguments.
+
+        Returns the dictionary with all keyword arguments.
+        """
+        return self._args
 
     def add_class(self, class_):
         """Adds a new class style to this element"""
@@ -62,7 +123,7 @@ class Element:
 
     def set_class_list(self, lst):
         """Sets the element's style classes to lst (a list)"""
-        if type(lst) != list:
+        if not isinstance(lst, list):
             raise TypeError("The ClassList should be a list")
         self._styles = lst
 

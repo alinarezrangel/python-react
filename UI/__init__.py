@@ -11,4 +11,4 @@ directly X.org, Mir or Wayland.
 
 from .renderedobject import *
 from .element import *
-from .blockelement import *
+from .container import *

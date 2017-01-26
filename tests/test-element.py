@@ -1,28 +1,26 @@
 import UI
 
-class Button(UI.Element):
+class Button(UI.Container):
     def __init__(self, *args, **kwargs):
-        super().__init__()
-
-        self.args = kwargs
+        super().__init__(*args, **kwargs)
 
         # We can use super().args().get(key) and is
         # not needed save the kwargs in a variable
-        self.label = self.args.get("label")
+        self.label = super().register_argument("label", "")
 
         if type(self.label) != str:
             raise TypeError('The button label is not a string')
 
+        super().add(self.label)
+
     def render(self):
+        args = super().extend_properties({})
+        args["type"] = "button"
+
         res = UI.renderedobject.RenderedObject(
             tag_name = "button",
-            properties = {
-                "type": "button",
-                "class": "button"
-            },
-            inner_content = [
-                self.label
-            ]
+            properties = args,
+            inner_content = super().get_items()
         )
         return res
 
@@ -32,12 +30,12 @@ b3 = Button(label="Button 3")
 b4 = Button(label="Button 4")
 b5 = Button(label="Button 5")
 
-c1 = UI.Block(items=[b1, b2])
-c2 = UI.Block(items=[b3])
-c3 = UI.Block(items=[b4, b5])
-c4 = UI.Block(items=[c1, c3])
+c1 = UI.Container(items=[b1, b2])
+c2 = UI.Container(items=[b3])
+c3 = UI.Container(items=[b4, b5])
+c4 = UI.Container(items=[c1, c3])
 
-root = UI.Block(items=[c2, c4])
+root = UI.Container(items=[c2, c4])
 
-print(root.render().to_tree_string())
+print(root.render().to_xml_string())
 print(UI.get_all_elements())
