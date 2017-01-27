@@ -16,7 +16,6 @@ class Button(UI.Container):
     add images, text tags and others to a button.
     """
 
-
     def __init__(self, *args, **kwargs):
         """Creates the new Button.
 
