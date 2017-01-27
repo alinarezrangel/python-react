@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+
 from PythonReact import UI, engines
 
 b1 = UI.Button(label="Button 1")
