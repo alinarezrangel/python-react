@@ -6,7 +6,7 @@
 An Element is any UI element, these can have events, layouts, etc.
 """
 
-from .renderedobject import *
+from PythonReact import UI
 
 class Element:
     """Represents an Element, the basic UI element.
@@ -101,7 +101,7 @@ class Element:
             # list.remove raises a ValueError if the removed element
             # is not in the list
             self._styles.remove(str(class_))
-        except ValueError as err:
+        except ValueError:
             return False
         else:
             return True
@@ -112,7 +112,7 @@ class Element:
             # list.index raises a ValueError if the searched element
             # is not in the list
             self._styles.index(str(class_))
-        except ValueError as err:
+        except ValueError:
             return False
         else:
             return True
@@ -123,8 +123,6 @@ class Element:
 
     def set_class_list(self, lst):
         """Sets the element's style classes to lst (a list)"""
-        if not isinstance(lst, list):
-            raise TypeError("The ClassList should be a list")
         self._styles = lst
 
     def render(self):
@@ -133,8 +131,32 @@ class Element:
         It's important override this method when inherits Element.
         This method should return a RenderedObject
         """
-        # The Component is abstract, so we can't render it
-        return NULL_NODE
+        # The Element is abstract, so we can't render it
+        return UI.NULL_NODE
+
+    def emit(self, event_name, *args, **kwargs):
+        """Emits the event event_name to this element.
+
+        args and kwargs will be passed to the handler (if any)
+        and the handler's returned value will be returned too.
+
+        If no handler is attached to this event, does nothing.
+
+        See the attached handlers using the Element.have_event
+        method.
+
+        This method should be overrided for all elements that
+        have events.
+        """
+        return None
+
+    def have_event(self, event_name):
+        """Returns True if this element have a handler attached
+        to the event event_name.
+
+        Returns False otherwise.
+        """
+        return False
 
 def get_all_elements():
     """Returns a set containing all subclasses of the Element class.

@@ -40,7 +40,7 @@ otherwise.
 Others tags will be not parsed.
 """
 
-import UI
+from PythonReact import UI
 
 class TreeToHTML:
     """The TreeToHTML class exports a AbstractTree to a HTML ready-to-parse
@@ -177,4 +177,4 @@ class TreeToHTML:
         )
 
     def toHTML(self, tree):
-        pass
+        return self.convert_node(tree, {"iform": False}).to_xml_string()

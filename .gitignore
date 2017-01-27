@@ -90,3 +90,9 @@ ENV/
 
 # Visual Studio Code configuration files
 .vscode/
+
+# CTags file
+tags
+
+# Output tests HTML files
+tests/*.(x)?htm(l)?

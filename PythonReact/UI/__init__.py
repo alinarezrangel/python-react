@@ -10,5 +10,7 @@ directly X.org, Mir or Wayland.
 """
 
 from .renderedobject import *
+from .events import *
 from .element import *
 from .container import *
+from .button import *
