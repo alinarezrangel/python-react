@@ -26,6 +26,8 @@ class Button(UI.Container):
         * "onclick" (also see Button.set_click_event): The callback that
         will be called when the button is pressed.
         * "type": The type of the button, "button" if not specified.
+        * "href" (if "type" is "link"): HyperReference (URI/URL) to the
+        resource.
 
         The button type can be:
 
@@ -33,8 +35,6 @@ class Button(UI.Container):
         * "submit": A button that submits a form (only works inside a form).
         * "reset": A button that reset the forms entries to their default values
         (only works inside a form).
-        * "href" (if "type" is "link"): HyperReference (URI/URL) to the
-        resource.
 
         NOTE: A button without href (type is not "link") will have an href of
         "#". It's like an element without name will have a name of "".

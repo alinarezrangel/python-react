@@ -3,15 +3,19 @@
 
 from PythonReact import UI, engines
 
+l1 = UI.Label(label = "First row", style = ["label"])
+l2 = UI.Label(label = "Second row", style = ["label"])
+l3 = UI.Label(label = "Third row", style = ["label"])
+
 b1 = UI.Button(label = "Button 1", type = "link", href = "#b1", style = ["button"])
 b2 = UI.Button(label = "Button 2", style = ["button", "padding-4"])
 b3 = UI.Button(label = "Button 3", style = ["button", "padding-32"])
 b4 = UI.Button(label = "Button 4", name="b1", style = ["button"])
 b5 = UI.Button(label = "Button 5", style = ["button", "padding-16"])
 
-c1 = UI.Container(items=[b1, b2], style = ["container"])
-c2 = UI.Container(items=[b3], style = ["container"])
-c3 = UI.Container(items=[b4, b5], style = ["container"])
+c1 = UI.Container(items=[l2, b1, b2], style = ["container"])
+c2 = UI.Container(items=[l1, b3], style = ["container"])
+c3 = UI.Container(items=[l3, b4, b5], style = ["container"])
 c4 = UI.Container(items=[c1, c3], style = ["container"])
 
 root = UI.Container(items=[c2, c4])
