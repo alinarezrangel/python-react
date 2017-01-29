@@ -4,8 +4,10 @@
 from PythonReact import UI, engines
 
 l1 = UI.Label(label = "First row", style = ["label"])
-l2 = UI.Label(label = "Second row", style = ["label"])
+l2 = UI.Label(style = ["label"])
 l3 = UI.Label(label = "Third row", style = ["label"])
+
+l2.add(UI.TextTag(text = "Second row", type = UI.TextTag.TEXT_TAG_BOLD))
 
 b1 = UI.Button(label = "Button 1", type = "link", href = "#b1", style = ["button"])
 b2 = UI.Button(label = "Button 2", style = ["button", "padding-4"])

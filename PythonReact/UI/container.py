@@ -40,6 +40,10 @@ class Container(UI.Element):
         for element in elements:
             self._items.append(element)
 
+    def get_rendered_items(self):
+        """Like get_items, but the returned list contains the rendered items"""
+        return [i.render() for i in self._items]
+
     def render(self):
         # First: get the RenderedObject arguments:
 
@@ -50,11 +54,7 @@ class Container(UI.Element):
         arguments = super().extend_properties({})
 
         # The rendered items of the box
-        rendered_items = []
-
-        # Render all items and push their in the list
-        for child in self._items:
-            rendered_items.append(child.render())
+        rendered_items = self.get_rendered_items()
 
         # Render this block and return
         result = UI.RenderedObject(

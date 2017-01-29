@@ -16,7 +16,7 @@ Not all RenderedObject tags can be used, the recognized tags are:
 * `label (form=False)`: Converted to `span (class=LABEL_CLASS)`
 * `paragraph`: Converted to `p`
 * `text`: Converted to `div` with only `p` as childs
-* `text-tag`: Converted to `span`
+* `text-tag` (type=TYPE): Converted to `span`
 * `link (href=HREF)`: Converted to `a (href=HREF)`
 * `form (act=ACTION method=MTH)`: Converted to `form (action=ACTION method=MTH)`
 * `frame (title=TTL)`: Converted to `fieldset` if inside a form or styled `div`
@@ -59,7 +59,6 @@ class TreeToHTML:
             "raw-text": "pre",
             "code-text": "code",
             "paragraph": "p",
-            "text-tag": "span",
             "link": "a",
             "form": "form",
             "separator": "hr",
@@ -130,6 +129,28 @@ class TreeToHTML:
                 ] + childs
         elif ntg == "heading":
             tag = "h" + str(pp.get("level", "1"))
+        elif ntg == "text-tag":
+            if pp.get("type", "none") == "bold":
+                tag = "b"
+            if pp.get("type", "none") == "italic":
+                tag = "i"
+            if pp.get("type", "none") == "underline":
+                tag = "u"
+            if pp.get("type", "none") == "quote":
+                tag = "q"
+            if pp.get("type", "none") == "subscript":
+                tag = "sub"
+            if pp.get("type", "none") == "superscript":
+                tag = "sup"
+            if pp.get("type", "none") == "custom":
+                tag = "span"
+            if pp.get("type", "none") == "none":
+                tag = "span"
+            if pp.get("type", "none") == "normal":
+                tag = "span"
+            if pp.get("type", "none") == "link":
+                tag = "a"
+                expp["href"] = pp.get("href", "#")
         else:
             tag = self.get_tag_name(ntg)
 

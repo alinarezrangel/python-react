@@ -85,7 +85,7 @@ class Button(UI.Container):
         arguments = self.extend_properties({})
 
         # The rendered items of the box
-        rendered_items = [self._label] + super().get_items()
+        rendered_items = [self._label] + super().get_rendered_items()
 
         # Render this block and return
         result = UI.RenderedObject(
