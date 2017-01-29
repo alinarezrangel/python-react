@@ -14,3 +14,4 @@ from .events import *
 from .element import *
 from .container import *
 from .button import *
+from .label import *
