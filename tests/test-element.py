@@ -3,10 +3,10 @@
 
 from PythonReact import UI, engines
 
-b1 = UI.Button(label = "Button 1", style = ["button"])
+b1 = UI.Button(label = "Button 1", type = "link", href = "#b1", style = ["button"])
 b2 = UI.Button(label = "Button 2", style = ["button", "padding-4"])
 b3 = UI.Button(label = "Button 3", style = ["button", "padding-32"])
-b4 = UI.Button(label = "Button 4", style = ["button"])
+b4 = UI.Button(label = "Button 4", name="b1", style = ["button"])
 b5 = UI.Button(label = "Button 5", style = ["button", "padding-16"])
 
 c1 = UI.Container(items=[b1, b2], style = ["container"])

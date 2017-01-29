@@ -33,6 +33,8 @@ class Button(UI.Container):
         * "submit": A button that submits a form (only works inside a form).
         * "reset": A button that reset the forms entries to their default values
         (only works inside a form).
+        * "href" (if "type" is "link"): HyperReference (URI/URL) to the
+        resource.
         """
         super().__init__(*args, **kwargs)
 
@@ -40,6 +42,10 @@ class Button(UI.Container):
         self._label = super().register_argument("label", "")
         self._onclick = super().register_argument("onclick", None)
         self._type = super().register_argument("type", "button")
+        self._href = "#"
+
+        if self._type == "link":
+            self._href = super().register_argument("href", "#")
 
     def extend_properties(self, arguments):
         """Overload of UI.Container.extend_properties"""

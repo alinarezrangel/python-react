@@ -23,13 +23,17 @@ class Element:
         """Creates a new Element, by default, null.
 
         The arguments keywords object is implemented in sub-classes,
-        in this Element class, can be void. The only keyword argument used
-        is style, which contains all element classes.
+        in this Element class, can be void. The recognized keyword
+        arguments are:
+
+        * "style": A list of strings containing the element's class names.
+        * "name": A string containing the element's name (or ID).
         """
 
         self._args = kwargs
         self._kargs = []
         self._styles = self.register_argument("style", [])
+        self._name = self.register_argument("name", "")
 
     def register_argument(self, name, otherwise):
         """Gets and registers a keyword name.
@@ -78,7 +82,10 @@ class Element:
 
         Returns the version of arguments with new properties.
         """
+
         arguments["style"] = self.class_list_as_css_string()
+        arguments["name"] = self.get_name()
+
         return arguments
 
     def args(self):
@@ -118,8 +125,20 @@ class Element:
             return True
 
     def class_list(self):
+        """See get_class_list"""
+        return self.get_class_list()
+
+    def get_class_list(self):
         """Returns the elements's style classes list"""
         return self._styles
+
+    def get_name(self):
+        """Returns the element's name or ID"""
+        return self._name
+
+    def set_name(self, name):
+        """Sets the element's name or ID"""
+        self._name = name
 
     def set_class_list(self, lst):
         """Sets the element's style classes to lst (a list)"""

@@ -159,16 +159,15 @@ class TreeToHTML:
             elif ntg == "entry":
                 expp.update(pp)
 
-        expp["class"] = class_list
+        if (pp.get("style") is not None) and (pp.get("style").strip() != ""):
+            expp["class"] = class_list
 
-        if pp.get("id") is not None:
-            expp["id"] = pp.get("id", "")
-        if pp.get("href") is not None:
-            expp["href"] = pp.get("href", "")
-        if pp.get("name") is not None:
-            expp["name"] = pp.get("name", "")
-        if pp.get("inline-css") is not None:
-            expp["style"] = pp.get("inline-css", "")
+        if (pp.get("name") is not None) and (pp.get("name").strip() != ""):
+            expp["id"] = pp.get("name")
+        if (pp.get("href") is not None) and (pp.get("href").strip() != ""):
+            expp["href"] = pp.get("href")
+        if (pp.get("css") is not None) and (pp.get("css").strip() != ""):
+            expp["style"] = pp.get("css")
 
         return UI.RenderedObject(
             tag_name = tag,
