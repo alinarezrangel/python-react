@@ -132,29 +132,37 @@ class TreeToHTML:
         elif ntg == "text-tag":
             if pp.get("type", "none") == "bold":
                 tag = "b"
-            if pp.get("type", "none") == "italic":
+            elif pp.get("type", "none") == "italic":
                 tag = "i"
-            if pp.get("type", "none") == "underline":
+            elif pp.get("type", "none") == "underline":
                 tag = "u"
-            if pp.get("type", "none") == "quote":
+            elif pp.get("type", "none") == "strike":
+                tag = "s"
+            elif pp.get("type", "none") == "small":
+                tag = "small"
+            elif pp.get("type", "none") == "big":
+                tag = "big"
+            elif pp.get("type", "none") == "quote":
                 tag = "q"
-            if pp.get("type", "none") == "subscript":
+            elif pp.get("type", "none") == "subscript":
                 tag = "sub"
-            if pp.get("type", "none") == "superscript":
+            elif pp.get("type", "none") == "superscript":
                 tag = "sup"
-            if pp.get("type", "none") == "custom":
+            elif pp.get("type", "none") == "custom":
                 tag = "span"
-            if pp.get("type", "none") == "none":
+            elif pp.get("type", "none") == "normal":
                 tag = "span"
-            if pp.get("type", "none") == "normal":
-                tag = "span"
-            if pp.get("type", "none") == "link":
+            elif pp.get("type", "none") == "link":
                 tag = "a"
                 expp["href"] = pp.get("href", "#")
+            else:
+                tag = "span"
         else:
             tag = self.get_tag_name(ntg)
 
             if ntg == "link":
+                expp["href"] = pp.get("href", "#")
+            elif (ntg == "button") and (pp.get("type", "button") == "link"):
                 expp["href"] = pp.get("href", "#")
             elif ntg == "form":
                 expp["action"] = pp.get("act", "#")
@@ -185,8 +193,6 @@ class TreeToHTML:
 
         if (pp.get("name") is not None) and (pp.get("name").strip() != ""):
             expp["id"] = pp.get("name")
-        if (pp.get("href") is not None) and (pp.get("href").strip() != ""):
-            expp["href"] = pp.get("href")
         if (pp.get("css") is not None) and (pp.get("css").strip() != ""):
             expp["style"] = pp.get("css")
 
