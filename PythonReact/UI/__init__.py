@@ -17,3 +17,4 @@ from .button import *
 from .label import *
 from .texttag import *
 from .link import *
+from .textview import *

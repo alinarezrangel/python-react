@@ -18,12 +18,18 @@ b3 = UI.Button(label = "Button 3", style = ["button", "padding-32"])
 b4 = UI.Button(label = "Button 4", name="b1", style = ["button"])
 b5 = UI.Button(label = "Button 5", style = ["button", "padding-16"])
 
+v1 = UI.TextView(style = ["container", "textview"])
+v1.add_text("Title!", UI.TextView.TEXT_VIEW_HEADING_TITLE)
+v1.add_text(" normal    text", UI.TextView.TEXT_VIEW_NORMAL)
+v1.add_text(" raw    text", UI.TextView.TEXT_VIEW_RAW)
+v1.add_text(" code    text", UI.TextView.TEXT_VIEW_CODE)
+
 c1 = UI.Container(items=[l2, b1, b2], style = ["container"])
 c2 = UI.Container(items=[l1, b3], style = ["container"])
 c3 = UI.Container(items=[l3, b4, b5], style = ["container"])
 c4 = UI.Container(items=[c1, c3], style = ["container"])
 
-root = UI.Container(items=[c2, c4])
+root = UI.Container(items=[c2, c4, v1])
 
 # Basic HTML with some CSS template.
 # Uses the test.css file
