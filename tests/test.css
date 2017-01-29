@@ -68,9 +68,15 @@ html, body {
     cursor: default;
 }
 
-.container {
+.textview, .container {
     display: block;
     padding: 16px;
     margin: 2px;
     border: 1px dotted black;
+}
+
+.separator {
+    border: 1px solid black;
+    width: auto;
+    margin: 16px 8px;
 }

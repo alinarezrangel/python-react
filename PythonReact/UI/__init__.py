@@ -18,3 +18,4 @@ from .label import *
 from .texttag import *
 from .link import *
 from .textview import *
+from .separator import *
