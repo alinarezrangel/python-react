@@ -104,7 +104,7 @@ class TreeToHTML:
                 tag = "button"
                 expp["type"] = pp.get("type", "button")
         elif ntg == "label":
-            if pp.get("form", True):
+            if data["iform"]:
                 tag = "label"
             else:
                 tag = "span"

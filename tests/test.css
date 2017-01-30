@@ -75,6 +75,10 @@ html, body {
     border: 1px dotted black;
 }
 
+.textview {
+    cursor: text;
+}
+
 .separator {
     border: 1px solid black;
     width: auto;

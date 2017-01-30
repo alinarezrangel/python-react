@@ -24,24 +24,12 @@ class Label(UI.Container):
 
         The optional arguments are:
 
-        * "form": True if the label is the label of a input element, False
-        otherwise.
         * "label" (changeable): Label inner text.
         """
         super().__init__(*args, **kwargs)
 
         # Get the arguments or, it's default values
-        self._form = super().register_argument("form", False)
         self._label = super().register_argument("label", "")
-
-    def extend_properties(self, arguments):
-        """Overload of UI.Container.extend_properties"""
-
-        arguments = super().extend_properties(arguments)
-
-        arguments["form"] = self._form
-
-        return arguments
 
     def set_label(self, text):
         """Sets the label's inner text"""
@@ -53,7 +41,7 @@ class Label(UI.Container):
 
     def render(self):
         # First: get the RenderedObject arguments:
-        arguments = self.extend_properties({})
+        arguments = super().extend_properties({})
 
         # The rendered items of the box
         rendered_items = [self._label] + super().get_rendered_items()
