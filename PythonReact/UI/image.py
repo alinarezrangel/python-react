@@ -7,7 +7,7 @@
 
 from PythonReact import UI
 
-class Image(UI.Container):
+class Image(UI.Element):
     """Represents the Image element, a display of graphical data.
 
     The Image element can display a graphical image with format

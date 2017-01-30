@@ -20,3 +20,4 @@ from .link import *
 from .textview import *
 from .separator import *
 from .image import *
+from .frame import *

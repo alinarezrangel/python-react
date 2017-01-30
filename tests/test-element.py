@@ -26,12 +26,14 @@ v1.add_text(" normal    text", UI.TextView.TEXT_VIEW_NORMAL)
 v1.add_text(" raw    text", UI.TextView.TEXT_VIEW_RAW)
 v1.add_text(" code    text", UI.TextView.TEXT_VIEW_CODE)
 
+f1 = UI.Frame(title = "Frame's title", items = [v1], style = ["frame"])
+
 c1 = UI.Container(items=[l2, b1, b2], style = ["container"])
 c2 = UI.Container(items=[l1, b3], style = ["container"])
 c3 = UI.Container(items=[l3, b4, b5], style = ["container"])
 c4 = UI.Container(items=[c1, c3], style = ["container"])
 
-root = UI.Container(items=[c2, c4, s1, v1])
+root = UI.Container(items=[c2, c4, s1, f1])
 
 # Basic HTML with some CSS template.
 # Uses the test.css file
