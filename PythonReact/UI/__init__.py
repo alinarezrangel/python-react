@@ -21,3 +21,4 @@ from .textview import *
 from .separator import *
 from .image import *
 from .frame import *
+from .form import *

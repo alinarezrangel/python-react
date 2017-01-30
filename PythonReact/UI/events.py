@@ -11,3 +11,4 @@ EVENT_NAME_CLICK - Click event.
 from PythonReact import UI
 
 EVENT_NAME_CLICK = 1
+EVENT_NAME_SUBMIT = 2
