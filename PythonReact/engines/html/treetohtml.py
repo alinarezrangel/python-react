@@ -21,6 +21,7 @@ Not all RenderedObject tags can be used, the recognized tags are:
 * `form (act=ACTION method=MTH)`: Converted to `form (action=ACTION method=MTH)`
 * `frame (title=TTL)`: Converted to `fieldset` if inside a form or styled `div`
 otherwise.
+* `image`: Converted to `img`
 * `block`: Converted to `div`
 * `separator`: Converted to `hr`
 * `line-entry`: Converted to `input (type="text")`
@@ -73,7 +74,8 @@ class TreeToHTML:
             "entry": "input",
             "title": "h1",
             "subtitle": "h2",
-            "sectiontitle": "h3"
+            "sectiontitle": "h3",
+            "image": "img"
         }
 
     def get_tag_name(self, tag_name):
@@ -187,6 +189,13 @@ class TreeToHTML:
                     expp["name"] = pp.get("group")
             elif ntg == "entry":
                 expp.update(pp)
+            elif ntg == "image":
+                expp["width"] = pp.get("width")
+                expp["height"] = pp.get("height")
+                expp["alt"] = pp.get("alt")
+                expp["title"] = pp.get("title")
+                expp["src"] = node.inner_content()[0]
+                childs = []
 
         if (pp.get("style") is not None) and (pp.get("style").strip() != ""):
             expp["class"] = class_list
