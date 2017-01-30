@@ -3,7 +3,7 @@
 
 from PythonReact import UI, engines
 
-l1 = UI.Link(label = "First row", href = "#", style = ["label"])
+l1 = UI.Link(label = "First row", href = "#", style = ["link"])
 l2 = UI.Label(style = ["label"])
 l3 = UI.Label(label = "Third row", style = ["label"])
 
