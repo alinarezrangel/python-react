@@ -161,6 +161,7 @@ class TreeToHTML:
                 tag = "span"
         else:
             tag = self.get_tag_name(ntg)
+            entry_type = False
 
             if ntg == "link":
                 expp["href"] = pp.get("href", "#")
@@ -171,24 +172,31 @@ class TreeToHTML:
                 expp["method"] = pp.get("method", "#")
             elif ntg == "line-entry":
                 expp["type"] = "text"
+                entry_type = True
             elif ntg == "password-entry":
                 expp["type"] = "password"
+                entry_type = True
             elif ntg == "file-entry":
                 expp["type"] = "file"
+                entry_type = True
             elif ntg == "number-entry":
                 expp["type"] = "number"
+                entry_type = True
             elif ntg == "hidden-entry":
                 expp["type"] = "hidden"
+                entry_type = True
             elif ntg == "radio-button":
                 expp["type"] = "radio"
+                entry_type = True
                 if pp.get("group") is not None:
                     expp["name"] = pp.get("group")
             elif ntg == "check-button":
                 expp["type"] = "checkbox"
+                entry_type = True
                 if pp.get("group") is not None:
                     expp["name"] = pp.get("group")
             elif ntg == "entry":
-                expp.update(pp)
+                entry_type = True
             elif ntg == "image":
                 expp["width"] = pp.get("width")
                 expp["height"] = pp.get("height")
@@ -196,6 +204,14 @@ class TreeToHTML:
                 expp["title"] = pp.get("title")
                 expp["src"] = node.inner_content()[0]
                 childs = []
+
+            if entry_type:
+                if pp.get("form_name") is not None:
+                    expp["name"] = pp.get("form_name")
+                if pp.get("required") is not None:
+                    expp["required"] = pp.get("required")
+                if pp.get("placeholder") is not None:
+                    expp["placeholder"] = pp.get("placeholder")
 
         if (pp.get("style") is not None) and (pp.get("style").strip() != ""):
             expp["class"] = class_list

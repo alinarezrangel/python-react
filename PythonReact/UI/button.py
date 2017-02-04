@@ -76,7 +76,7 @@ class Button(UI.Container):
     def have_event(self, event_name):
         """Override of UI.Element.have_event"""
         if event_name == UI.EVENT_NAME_CLICK:
-            return True
+            return self._onclick is not None
 
         return super().have_event(event_name)
 

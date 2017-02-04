@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 
-"""Provides the Image element, a .
+"""Provides the Image element, a display for graphical data.
 
+The Image element can display a file in a image format.
 """
 
 from PythonReact import UI
